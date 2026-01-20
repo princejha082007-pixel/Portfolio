@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Your existing styles (profile-img, about-image img) */
+        .profile-img {
+            width: 120px; /* Smaller size for profile image */
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #007bff; /* Example border */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .about-image img {
+            width: 250px; /* Larger size for about image */
+            height: 250px;
+            border-radius: 10px; /* Slightly rounded corners */
+            object-fit: cover;
+            border: 3px solid #0056b3; /* Example border */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        /* Style for the success message */
+        #contact-success-message {
+            text-align: center;
+            padding-top:80px;
+            font-size: 2em;
+            color: #28a745; /* Green color for success */
+            margin-top: 50px; /* Adjust spacing */
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="home-section">
+        <div class="home-content">
+            <img src="{{ url_for('static', filename='css/images/Prince.jpg') }}" alt="Profile Image" class="profile-img">
+            <h1>Hello, I'm <span>Prince Kumar Jha</span></h1>
+            <p>Diploma Student | Python Developer | AI Enthusiast</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am a passionate and dedicated Diploma Student currently pursuing my studies after completing my 10th grade. Currently, I am gaining valuable practical experience as an intern at Tron Softech.</p>
+                <p>I am eager to delve deeper into the world of technology, with a strong focus on Machine Learning for my future endeavors.</p>
+                <div class="personal-info">
+                    <div>
+                        <h3>Education</h3>
+                        <p>Diploma in Information Technology (2023-Present)</p>
+                    </div>
+                    <div>
+                        <h3>Experience</h3>
+                        <p>Intern at Tron Softech (3 months)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='css/images/Prince.jpg') }}" alt="About Image">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills-section">
+        <h2>My Skills</h2>
+        <div class="skills-container">
+            <div class="central-skill">Python</div>
+            <div class="orbiting-skill" style="transform: rotate(0deg) translate(150px) rotate(0deg);">Java</div>
+            <div class="orbiting-skill" style="transform: rotate(60deg) translate(150px) rotate(-60deg);">C</div>
+            <div class="orbiting-skill" style="transform: rotate(120deg) translate(150px) rotate(-120deg);">C++</div>
+            <div class="orbiting-skill" style="transform: rotate(180deg) translate(150px) rotate(-180deg);">SQL</div>
+            <div class="orbiting-skill" style="transform: rotate(240deg) translate(150px) rotate(-240deg);">HTML/CSS</div>
+            <div class="orbiting-skill" style="transform: rotate(300deg) translate(150px) rotate(-300deg);">AI/ML</div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="project-content">
+                    <h3>AI Chatbot for Food Delivery</h3>
+                    <p>Developed an intelligent chatbot using Python to streamline the food ordering process.</p>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">AI</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Intelligent Snake Game</h3>
+                    <p>Created a classic Snake game where the snake intelligently navigates to find food.</p>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Game AI</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <i class="fas fa-chess"></i>
+                </div>
+                <div class="project-content">
+                    <h3>Tic-Tac-Toe (Player vs. AI)</h3>
+                    <p>Developed a Tic-Tac-Toe game featuring both two-player mode and an intelligent AI opponent.</p>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">AI Logic</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Contact Me</h2>
+        {% if show_contact_success %}
+            <h2 id="contact-success-message">Contact Sent Successfully!</h2>
+        {% else %}
+            <form action="/contact" method="POST" class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>&copy; 2023 My Portfolio. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

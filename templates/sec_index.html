@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince's Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sec_style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h1>Prince Kumar Jha</h1>
+            <p>Python Developer | AI Enthusiast</p>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Diploma student passionate about technology...</p>
+        </section>
+
+        <section id="skills">
+            <h2>My Skills</h2>
+            <div class="skills">Python, Java, SQL</div>
+        </section>
+
+        <section id="contact">
+            {% if show_contact_success %}
+                <h2>Thank you for your message!</h2>
+            {% else %}
+                <form action="/contact" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            {% endif %}
+        </section>
+    </main>
+
+    <script>
+        // Simple smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
